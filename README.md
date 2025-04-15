@@ -1,11 +1,11 @@
 # GraphQL Server Example
 
-This project is a simple GraphQL server built using Apollo Server. It demonstrates how to define a schema, resolvers, and manage data for a GraphQL API.
+This project is a simple GraphQL server built using Apollo Server. It demonstrates how to define a schema, resolvers, and manage mock data for a GraphQL API.
 
 ## Features
 
 - Query games, reviews, and authors.
-- Perform mutations to add, update, or delete games.
+- Perform mutations to add, update, or delete games, reviews, and authors.
 - Relationships between games, reviews, and authors.
 
 ## Installation
@@ -44,13 +44,31 @@ This project is a simple GraphQL server built using Apollo Server. It demonstrat
 ```graphql
 query {
   games {
-	 id
-	 title
-	 platform
-	 reviews {
-		id
-		content
-	 }
+    id
+    title
+    platform
+    reviews {
+      id
+      content
+    }
+  }
+}
+```
+
+### Query All Reviews
+```graphql
+query {
+  reviews {
+    id
+    rating
+    content
+    game {
+      title
+    }
+    author {
+      name
+      verified
+    }
   }
 }
 ```
@@ -59,9 +77,9 @@ query {
 ```graphql
 mutation {
   addGame(title: "New Game", platform: ["PC", "Xbox"]) {
-	 id
-	 title
-	 platform
+    id
+    title
+    platform
   }
 }
 ```
