@@ -54,6 +54,19 @@ const resolvers = {
 			};
 			games.push(newGame);
 			return newGame;
+		},
+		updateGame: (_, {id, title, platform}) => {
+			const gameIndex = games.findIndex(game => game.id === id);
+			if (gameIndex === -1) {
+				throw new Error('Game not found');
+			}
+			const updatedGame = {
+				...games[gameIndex],
+				title: title || games[gameIndex].title,
+				platform: platform || games[gameIndex].platform
+			};
+			games[gameIndex] = updatedGame;
+			return updatedGame;
 		}
 	}
 }
